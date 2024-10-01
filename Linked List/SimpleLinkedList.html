@@ -1,0 +1,114 @@
+<html>
+    <head>
+        <script>
+            class node{
+    constructor(newData){
+        this.head={
+            val:newData,
+            next:null,
+        }
+        this.tail = this.head
+        this.size = 1
+    }
+
+    insertAtTail(newData){
+        let temp={
+            val:newData,
+            next:null
+        }
+        this.tail.next = temp;
+        this.tail = temp;
+        this.size+=1;
+    }
+
+    insertAtHead(newData){
+        let temp = {
+            val:newData,
+            next:null
+        }
+        temp.next = this.head
+        this.head = temp
+        this.size+=1
+    }
+
+    traversing(){
+        let temp = this.head
+        let str = ``
+        while(temp){
+            str+=`${temp.val} -> `
+            temp = temp.next
+        }
+        console.log(str)
+    }
+
+    deleteNode(k){
+        if(k == 1){
+            this.head=this.head.next
+            return 
+        }
+        let temp = this.head
+        let pre = null
+        k-=1
+        while(k-- && temp.next){
+            pre = temp
+            temp = temp.next
+        }
+        pre.next = temp.next
+        temp.next = null
+    }
+
+        insertNodeAtPosition(newData,position){
+            if(position == 1){
+                this.insertAtHead(newData)
+                return
+            }
+
+            let temp = this.head
+            let cnt = 1
+            while(cnt < position-1 && temp.next){
+                temp = temp.next
+                cnt++
+            }
+
+            if(temp.next == null){
+                this.insertAtTail(newData)
+                return
+            }
+
+            let newNode = {
+                val:newData,
+                next:null
+            }
+            newNode.next = temp.next
+            temp.next = newNode
+        }
+
+        searching(key){
+            let temp = this.head
+            while(temp){
+                if(temp.val == key){
+                    console.log("found it",temp)
+                    return
+                }
+                temp = temp.next
+            }
+            console.log(`${key} doesn't found`)
+        }
+    }
+    let obj = new node(1)
+    obj.insertAtTail(2)
+    obj.insertAtTail(3)
+    obj.insertAtTail(4)
+    // console.warn(obj) // its show linked list
+    obj.traversing() // it is used to traverse the linked list
+    // obj.deleteNode(3) // it is used to delete a perticular node
+    // obj.traversing()
+    obj.insertNodeAtPosition(25,3)// it's used to insert node at perticular position
+    obj.traversing()
+    obj.searching(4)// this is for searching tha node with the help of value
+        </script>
+    </head>
+    <body>
+        
+    </body>
+</html>
