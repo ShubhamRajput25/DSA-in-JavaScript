@@ -1,0 +1,89 @@
+<html>
+    <head>
+        <script>
+           class node{
+
+            constructor(newData){
+                this.head={
+                    val:newData,
+                    next:null,
+                    pre:null
+                }
+                this.tail = this.head
+                this.size = 1
+            }
+            
+            insertAtTail(newData){
+                let temp={
+                    val:newData,
+                    next:null,
+                    pre:null
+                }
+                this.tail.next = temp
+                temp.pre = this.tail
+                this.tail = temp
+            }
+
+            insertAtHead(newData){
+                let temp={
+                    val:newData,
+                    next:null,
+                    pre:null
+                }
+                this.head.pre = temp
+                temp.next = this.head
+                this.head = temp
+            }
+
+            insertAtPostion(newData,postion){
+
+                if(postion === 1){
+                    this.insertAtHead(newData)
+                    return
+                }
+
+                let cnt = 1
+                let temp = this.head
+                while(cnt < postion-1 && temp){
+                    temp = temp.next
+                    cnt++
+                }
+
+                if(temp.next == null){
+                    this.insertAtTail(newData)
+                    return
+                }
+
+                let newNode = {
+                    val:newData,
+                    next:null,
+                    pre:null
+                }
+                newNode.next = temp.next
+                temp.next = newNode
+                newNode.pre = temp
+            }
+
+            traversing(){
+                let temp = this.head
+                let str
+                while(temp){
+                    str+=`${temp.val}, `
+                    temp = temp.next
+                }
+                console.log(str)
+            }
+            
+
+           }
+
+           let obj = new node(1)
+           obj.insertAtTail(2)
+           obj.insertAtTail(3)
+           
+           obj.insertAtPostion(25,2)
+           obj.traversing()
+           console.log(obj)
+        </script>
+    </head>
+</html>
